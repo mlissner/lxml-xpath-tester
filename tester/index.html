@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <title>lxml-powered XPath Tester</title>
+        <style type="text/css">
+            table { width: 100%;}
+            th { 
+                vertical-align: top; 
+                text-align: right;
+                width: 0px;
+            }
+            input, textarea { width: 100%; }
+            #button-cell {width: 0px;}
+            .error, {padding:.8em;margin-bottom:1em;border:2px solid #ddd;}
+            .error {background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
+        </style>
+        <!--  from http://softwaremaniacs.org/soft/highlight/en/description/ -->
+        <link rel="stylesheet" href="/static/default.css">
+        <script src="/static/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script type="text/javascript">
+            window.onload = function(){
+               var text_input = document.getElementById('id_q');
+               text_input.focus();
+            }
+        </script>
+
+    </head> 
+    
+    <body>
+        <h1>lxml-Powered XPath Tester</h1>
+        
+        {% if form.errors %}
+            <div class="error">
+                <p>Make sure you put something in every field</p>
+            </div>
+        {% endif %}
+        
+        {% if lazy_error %}
+            <div class="error">
+                <p>{{lazy_error}}</p>
+            </div>            
+        {% endif %}
+                
+        <form action="" method="post">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>
+                            <label for="id_q">Query:</label>
+                        </th>
+                        <td>
+                            {{ form.q }}
+                        </td>
+                        <td id="button-cell">
+                            <button type="submit" class="button">Execute!</button>
+                        <td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="id_text">Text:</label>
+                        </th>
+                        <td colspan=2>
+                            {{ form.text }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        
+        
+            
+            {% if node_strings %}
+                <h2>{{ node_strings|length }} Result{{ node_strings|length|pluralize}}!&#13;</h2>
+                <ol>
+                    {% for node in node_strings %}
+                        <li><pre><code class="html">{{ node }}</code></pre></li>
+                    {% endfor %}
+                </ol>
+            {% else %}
+                <h2>No results...yet.</h2>
+            {% endif %}
+            
+        
+    </body>
+    
+</html>
