@@ -32,7 +32,7 @@ This is licensed under the permissive BSD license.
 
 Screenshot
 ==========
-Here's what it looks like right now:
+[Here's a screenshot of what it looks like.][1] 
 
-<img src="https://bitbucket.org/mlissner/lxml-xpath-tester/raw/fcf9077c78fc/tester/static/screenshot.jpg" width="500">
+[1]: https://bitbucket.org/mlissner/lxml-xpath-tester/raw/fcf9077c78fc/tester/static/screenshot.jpg
 
