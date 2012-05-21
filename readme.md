@@ -11,12 +11,12 @@ Make sure you have lxml and Django installed.
 
 Then just clone this repository somewhere, and use Django's server to run it.
 
-    mkdir xpath-tester
-    cd xpath-tester
+    mkdir xpathtester
+    cd xpathtester
     hg clone https://bitbucket.org/mlissner/lxml-xpath-tester .
     ./manage.py runserver
 
-That'll start Django's server. From there, just go to localhost:8000 in your
+That'll start Django's server. From there, just go to [localhost:8000][2] in your
 browser, and you'll be off and running.    
 
 
@@ -35,4 +35,4 @@ Screenshot
 [Here's a screenshot of what it looks like.][1] 
 
 [1]: https://bitbucket.org/mlissner/lxml-xpath-tester/raw/fcf9077c78fc/tester/static/screenshot.jpg
-
+[2]: http://localhost:8000
