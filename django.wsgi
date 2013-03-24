@@ -6,6 +6,6 @@ import _strptime
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
-sys.path.append('/var/www/lxml-xpath-tester')
+sys.path.append('/var/www/xpathtester')
 import django.core.handlers.wsgi
 application = django.core.handlers.wsgi.WSGIHandler()
