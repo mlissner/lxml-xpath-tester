@@ -66,20 +66,19 @@
                 </tbody>
             </table>
         </form>
-        
-        
-            
-            {% if node_strings %}
-                <h2>{{ node_strings|length }} Result{{ node_strings|length|pluralize}}!&#13;</h2>
-                <ol>
-                    {% for node in node_strings %}
-                        <li><pre><code class="html">{{ node }}</code></pre></li>
-                    {% endfor %}
-                </ol>
-            {% else %}
-                <h2>No results...yet.</h2>
-            {% endif %}
-            
+        {% if node_strings %}
+            <h2>{{ node_strings|length }} Result{{ node_strings|length|pluralize}}!&#13;</h2>
+            <ol>
+                {% for node in node_strings %}
+                    <li><pre><code class="html">{{ node }}</code></pre></li>
+                {% endfor %}
+            </ol>
+        {% else %}
+            <h2>No results...yet.</h2>
+        {% endif %}
+        <p id="footer">
+            <a href="https://bitbucket.org/mlissner/lxml-xpath-tester/">Bugs, more info, and code</a>
+        </p>    
         
     </body>
     

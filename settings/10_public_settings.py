@@ -1,34 +1,3 @@
-# Django settings for xpathtester project.
-
-DEBUG = False
-TEMPLATE_DEBUG = DEBUG
-
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
-
-MANAGERS = ADMINS
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',  # Or path to database file if using sqlite3.
-        'USER': '',  # Not used with sqlite3.
-        'PASSWORD': '',  # Not used with sqlite3.
-        'HOST': '',  # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',  # Set to empty string for default. Not used with sqlite3.
-    }
-}
-
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# On Unix systems, a value of None will cause Django to use the same
-# timezone as the operating system.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
-TIME_ZONE = 'America/Chicago'
-
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
@@ -75,6 +44,8 @@ STATICFILES_DIRS = (
     '.',
     'tester',
     '/var/www/xpathtester/tester',
+    '/var/www/lxml-xpath-tester/tester',
+    '/var/www/lxml-xpath-tester/tester/static',
 )
 
 # List of finder classes that know how to find static files in
@@ -84,9 +55,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = '_mipdi+3j)esqe22m6_fr1u)@x@r0-y-sl^8xwj00qnie$nc1f'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -111,6 +79,8 @@ TEMPLATE_DIRS = (
     '.',
     'tester',
     '/var/www/xpathtester/tester',
+    '/var/www/lxml-xpath-tester/tester',
+    '/var/www/lxml-xpath-tester/tester/static',
 )
 
 INSTALLED_APPS = (

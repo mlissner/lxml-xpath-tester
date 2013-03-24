@@ -1,0 +1,3 @@
+
+syntax: regexp
+^settings/20_private_settings\.py$

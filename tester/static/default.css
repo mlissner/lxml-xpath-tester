@@ -1,8 +1,12 @@
-/*
+/* xpathtester code */
+#footer {
+   position: static;
+   text-align: right;
+   margin: 0px; 
+   padding: 0.5em;
+}
 
-Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
-
-*/
+/* Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org> */
 
 pre code {
   display: block; padding: 0.5em;
