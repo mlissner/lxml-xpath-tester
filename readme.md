@@ -5,6 +5,12 @@ queries.
 
 It's designed to be rough, but robust, so don't expect it to be pretty.
 
+
+Live usage
+==========
+This can be seen live at [http://xpath.courtlistener.com][3]
+
+
 Installation & dependencies
 ===========================
 Make sure you have lxml and Django installed.
@@ -36,3 +42,4 @@ Screenshot
 
 [1]: https://bitbucket.org/mlissner/lxml-xpath-tester/raw/fcf9077c78fc/tester/static/screenshot.jpg
 [2]: http://localhost:8000
+[3]: http://xpath.courtlistener.com
