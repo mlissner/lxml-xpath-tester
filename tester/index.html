@@ -10,8 +10,9 @@
             }
             input, textarea { width: 100%; }
             #button-cell {width: 0px;}
-            .error, {padding:.8em;margin-bottom:1em;border:2px solid #ddd;}
+            .error, .notice {padding:.8em;margin-bottom:1em;border:2px solid #ddd;}
             .error {background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
+            .notice {background:#FFF6BF;color:#514721;border-color:#FFD324;}
         </style>
         <!--  from http://softwaremaniacs.org/soft/highlight/en/description/ -->
         <link rel="stylesheet" href="/static/default.css">
@@ -42,7 +43,7 @@
         {% endif %}
 
         {% if lazy_warning %}
-            <div class="warning">
+            <div class="notice">
                 <p>{{ lazy_warning }}</p>
             </div>
         {% endif %}
