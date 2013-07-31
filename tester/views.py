@@ -32,10 +32,10 @@ def run_xpath(request):
             # Run the xpath, and return the results
             try:
                 nodes = html_tree.xpath(q)
-            except XPathEvalError:
+            except XPathEvalError, e:
                 return render_to_response('index.html',
                                           {'form': form,
-                                           'lazy_error': 'Invalid XPath Expression.'},
+                                           'lazy_error': 'Invalid XPath Expression: %s' % e},
                                           RequestContext(request))
             if type(nodes) == bool:
                 return render_to_response('index.html',
