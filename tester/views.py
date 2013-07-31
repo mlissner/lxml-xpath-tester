@@ -37,17 +37,24 @@ def run_xpath(request):
                                           {'form': form,
                                            'lazy_error': 'Invalid XPath Expression.'},
                                           RequestContext(request))
-            node_strings = []
-            for node in nodes:
-                try:
-                    s = html.tostring(node,
-                                      encoding='unicode',
-                                      pretty_print=True).strip()
-                    node_strings.append(s)
-                except TypeError:
-                    # Returned a text node, not an element.
-                    if len(node.strip()) > 0:
-                        node_strings.append(node)
+            if type(nodes) == bool:
+                return render_to_response('index.html',
+                                          {'form': form,
+                                           'lazy_warning': 'Your query did not return any elements, but instead '
+                                                           'returned the boolean: \'%s\'' % nodes},
+                                          RequestContext(request))
+            else:
+                node_strings = []
+                for node in nodes:
+                    try:
+                        s = html.tostring(node,
+                                          encoding='unicode',
+                                          pretty_print=True).strip()
+                        node_strings.append(s)
+                    except TypeError:
+                        # Returned a text node, not an element.
+                        if len(node.strip()) > 0:
+                            node_strings.append(node)
 
             return render_to_response('index.html',
                                       {'form': form,

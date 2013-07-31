@@ -3,8 +3,8 @@
         <title>lxml-powered XPath Tester</title>
         <style type="text/css">
             table { width: 100%;}
-            th { 
-                vertical-align: top; 
+            th {
+                vertical-align: top;
                 text-align: right;
                 width: 0px;
             }
@@ -24,23 +24,29 @@
             }
         </script>
         <link rel="shortcut icon" href="/static/favicon.ico" />
-    </head> 
-    
+    </head>
+
     <body>
         <h1>lxml-Powered XPath Tester</h1>
-        
+
         {% if form.errors %}
             <div class="error">
                 <p>Make sure you put something in every field</p>
             </div>
         {% endif %}
-        
+
         {% if lazy_error %}
             <div class="error">
-                <p>{{lazy_error}}</p>
-            </div>            
+                <p>{{ lazy_error }}</p>
+            </div>
         {% endif %}
-                
+
+        {% if lazy_warning %}
+            <div class="warning">
+                <p>{{ lazy_warning }}</p>
+            </div>
+        {% endif %}
+
         <form action="" method="post">
             <table>
                 <tbody>
@@ -78,8 +84,8 @@
         {% endif %}
         <p id="footer">
             <a href="https://bitbucket.org/mlissner/lxml-xpath-tester/">Bugs, more info, and code</a>
-        </p>    
-        
+        </p>
+
     </body>
-    
+
 </html>
