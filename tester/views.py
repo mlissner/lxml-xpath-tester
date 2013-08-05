@@ -1,5 +1,5 @@
 from lxml import html
-from lxml.etree import XPathEvalError
+from lxml.etree import XPathEvalError, ParserError
 
 from django import forms
 from django.shortcuts import render_to_response
@@ -12,7 +12,7 @@ class XPathForm(forms.Form):
 
 
 def run_xpath(request):
-    '''Take a form and return the nodes selected'''
+    """Take a form and return the nodes selected"""
     if request.method == 'POST':
         form = XPathForm(request.POST)
         if form.is_valid():
@@ -22,7 +22,15 @@ def run_xpath(request):
             q = cd['q']
 
             # Make a good HTML tree
-            html_tree = html.fromstring(text)
+            try:
+                html_tree = html.fromstring(text)
+            except ParserError, e:
+                return render_to_response(
+                    'index.html',
+                    {'form': form,
+                     'lazy_error': 'Unable to parse document: %s' % e},
+                    RequestContext(request)
+                )
 
             def remove_anchors(href):
                 # We don't like anchors. Away they go.
