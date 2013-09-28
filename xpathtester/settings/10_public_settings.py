@@ -1,6 +1,10 @@
+DEBUG = False
+
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
+
+SECRET_KEY = 'unused'
 
 SITE_ID = 1
 
@@ -11,6 +15,8 @@ USE_I18N = False
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale
 USE_L10N = False
+
+USE_TZ = False  # Default
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
@@ -66,19 +72,20 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'xpathtester.urls'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     '.',
     'tester',
+    'xpathtester/tester',
     '/var/www/xpathtester/tester',
+    '/var/www/xpathtester/xpathtester/tester',
     '/var/www/lxml-xpath-tester/tester',
     '/var/www/lxml-xpath-tester/tester/static',
 )
@@ -96,18 +103,51 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
+ALLOWED_HOSTS = ['.courtlistener.com',
+                 '127.0.0.1',]
+
+########################
+# Logging Machinations #
+########################
+# From: http://stackoverflow.com/questions/1598823/elegant-setup-of-python-logging-in-django
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s (%(pathname)s %(funcName)s): "%(message)s"'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
     'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'django.utils.log.NullHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'log_file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': '/var/log/courtlistener/django.log',
+            'maxBytes': '16777216',  # 16 megabytes
+            'formatter': 'verbose'
+        },
         'mail_admins': {
             'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler'
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True,
         }
     },
     'loggers': {
@@ -116,5 +156,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-    }
+        # This is the one that's used practically everywhere in the code.
+        'alert': {
+            'handlers': ['log_file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
 }

@@ -1,9 +1,10 @@
-from django.conf.urls.defaults import patterns
+from django.conf.urls import patterns
 
 from django.conf import settings
 from tester.views import run_xpath
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     (r'^$', run_xpath),
 )
 
