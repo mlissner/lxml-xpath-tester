@@ -19,7 +19,7 @@ Then just clone this repository somewhere, and use Django's server to run it.
 
     mkdir xpathtester
     cd xpathtester
-    hg clone https://bitbucket.org/mlissner/lxml-xpath-tester .
+    git clone https://github.com/mlissner/lxml-xpath-tester.git .
     ./manage.py runserver
 
 That'll start Django's server. From there, just go to [localhost:8000][2] in your
@@ -40,6 +40,6 @@ Screenshot
 ==========
 [Here's a screenshot of what it looks like.][1] 
 
-[1]: https://bitbucket.org/mlissner/lxml-xpath-tester/raw/fcf9077c78fc/tester/static/screenshot.jpg
+[1]: https://raw.githubusercontent.com/mlissner/lxml-xpath-tester/master/xpathtester/tester/static/screenshot.jpg
 [2]: http://localhost:8000
 [3]: http://xpath.courtlistener.com
