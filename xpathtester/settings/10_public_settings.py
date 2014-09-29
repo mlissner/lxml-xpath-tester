@@ -104,7 +104,8 @@ INSTALLED_APPS = (
 )
 
 ALLOWED_HOSTS = ['.courtlistener.com',
-                 '127.0.0.1',]
+                 '127.0.0.1',
+                 'localhost',]
 
 ########################
 # Logging Machinations #
