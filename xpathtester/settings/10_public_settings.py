@@ -104,7 +104,8 @@ INSTALLED_APPS = (
 )
 
 ALLOWED_HOSTS = ['.courtlistener.com',
-                 '127.0.0.1',]
+                 '127.0.0.1',
+                 'localhost',]
 
 ########################
 # Logging Machinations #
@@ -136,13 +137,6 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
-        'log_file': {
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/var/log/courtlistener/django.log',
-            'maxBytes': '16777216',  # 16 megabytes
-            'formatter': 'verbose'
-        },
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
@@ -154,12 +148,6 @@ LOGGING = {
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
-            'propagate': True,
-        },
-        # This is the one that's used practically everywhere in the code.
-        'alert': {
-            'handlers': ['log_file'],
-            'level': 'INFO',
             'propagate': True,
         },
     },
