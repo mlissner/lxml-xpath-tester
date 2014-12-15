@@ -73,13 +73,17 @@
                 </tbody>
             </table>
         </form>
-        {% if node_strings %}
+        {% if result_type == 'nodes' and node_strings %}
             <h2>{{ node_strings|length }} Result{{ node_strings|length|pluralize}}!&#13;</h2>
             <ol>
                 {% for node in node_strings %}
                     <li><pre><code class="html">{{ node }}</code></pre></li>
                 {% endfor %}
             </ol>
+        {% elif result_type == 'boolean' %}
+            <h2>Your query returned a Boolean with value: {{ boolean_result }}!</h2>
+        {% elif result_type == 'float' %}
+            <h2>Your query returned a float with value: {{ float_result }}!</h2>
         {% else %}
             <h2>No results...yet.</h2>
         {% endif %}

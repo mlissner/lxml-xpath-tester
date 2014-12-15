@@ -12,7 +12,7 @@ class XPathForm(forms.Form):
 
 
 def run_xpath(request):
-    """Take a form and return the nodes selected"""
+    """Take a form and return the result selected"""
     if request.method == 'POST':
         form = XPathForm(request.POST)
         if form.is_valid():
@@ -39,21 +39,40 @@ def run_xpath(request):
 
             # Run the xpath, and return the results
             try:
-                nodes = html_tree.xpath(q)
+                result = html_tree.xpath(q)
             except XPathEvalError, e:
-                return render_to_response('index.html',
-                                          {'form': form,
-                                           'lazy_error': 'Invalid XPath Expression: %s' % e},
-                                          RequestContext(request))
-            if type(nodes) == bool:
-                return render_to_response('index.html',
-                                          {'form': form,
-                                           'lazy_warning': 'Your query did not return any elements, but instead '
-                                                           'returned the boolean: \'%s\'' % nodes},
-                                          RequestContext(request))
-            else:
+                return render_to_response(
+                    'index.html',
+                    {
+                        'form': form,
+                        'lazy_error': 'Invalid XPath Expression: %s' % e
+                    },
+                    RequestContext(request)
+                )
+            if type(result) == bool:
+                return render_to_response(
+                    'index.html',
+                    {
+                        'form': form,
+                        'lazy_warning': 'Your query returned a Boolean!',
+                        'result_type': 'boolean',
+                        'boolean_result': result,
+                    },
+                    RequestContext(request)
+                )
+            if type(result) == float:
+                return render_to_response(
+                    'index.html',
+                    {
+                        'form': form,
+                        'result_type': 'float',
+                        'float_result': result,
+                    },
+                    RequestContext(request)
+                )
+            elif type(result) == list:
                 node_strings = []
-                for node in nodes:
+                for node in result:
                     try:
                         s = html.tostring(node,
                                           encoding='unicode',
@@ -64,10 +83,14 @@ def run_xpath(request):
                         if len(node.strip()) > 0:
                             node_strings.append(node)
 
-            return render_to_response('index.html',
-                                      {'form': form,
-                                       'node_strings': node_strings},
-                                      RequestContext(request))
+            return render_to_response(
+                'index.html',
+                {
+                    'form': form,
+                    'result_type': 'nodes',
+                    'node_strings': node_strings
+                },
+                RequestContext(request))
 
     else:
         # Form is loading for the first time
