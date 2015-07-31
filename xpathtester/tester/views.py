@@ -1,5 +1,5 @@
 from lxml import html
-from lxml.etree import XPathEvalError, ParserError
+from lxml.etree import XPathEvalError, ParserError, _ElementUnicodeResult
 
 from django import forms
 from django.shortcuts import render_to_response
@@ -70,7 +70,7 @@ def run_xpath(request):
                     },
                     RequestContext(request)
                 )
-            elif type(result) == list:
+            elif type(result) == list or type(result) == _ElementUnicodeResult:
                 node_strings = []
                 for node in result:
                     try:
@@ -80,8 +80,7 @@ def run_xpath(request):
                         node_strings.append(s)
                     except TypeError:
                         # Returned a text node, not an element.
-                        if len(node.strip()) > 0:
-                            node_strings.append(node)
+                        node_strings.append("'%s'" % node)
 
             return render_to_response(
                 'index.html',
